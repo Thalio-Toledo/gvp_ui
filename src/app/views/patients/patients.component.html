@@ -1,0 +1,32 @@
+
+<div class="patients-container">
+    <div class="patients-title">
+        <h2>Pacientes</h2>
+        <p-button (click)="createPatient()"  icon="pi pi-plus" [rounded]="true" />
+    </div>
+    <p-table [value]="patients()" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>Paciente</th>
+                <th>Idade</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Hospital</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-patient>
+            <tr>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.age }}</td>
+                <td>{{ patient.entranceAt | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ patient.exitAt | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ patient.hospital.name }}</td>
+                <td style="display: flex; gap:10px">
+                    <p-button (click)="editPatient(patient)"  icon="pi pi-pencil" [rounded]="true" />
+                    <p-button severity="danger"  (click)="deletePatient(patient)"  icon="pi pi-times" [rounded]="true" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

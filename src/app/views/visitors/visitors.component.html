@@ -1,0 +1,32 @@
+<div class="visitors-container">
+    <div class="visitors-title">
+        <h2>Visitantes</h2>
+        <p-button (click)="createVisitor()"  icon="pi pi-plus" [rounded]="true" />
+    </div>
+    <p-table [value]="visitors()" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>Visitante</th>
+                <th>Data de Nascimento</th>
+                <th>Email Jwpub</th>
+                <th>Email Pessoal</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+
+            </tr>
+        </ng-template>
+        <ng-template #body let-visitor>
+            <tr>
+                <td>{{ visitor.name }}</td>
+                <td>{{ visitor.birthDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ visitor.emailJwpub }}</td>
+                <td>{{ visitor.emailPersonal }}</td>
+                <td>{{ visitor.phoneNumber }}</td>
+                <td style="display: flex; gap:10px">
+                    <p-button (click)="editVisitor(visitor)"  icon="pi pi-pencil" [rounded]="true" />
+                    <p-button severity="danger"  (click)="deleteVisitor(visitor)"  icon="pi pi-times" [rounded]="true" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

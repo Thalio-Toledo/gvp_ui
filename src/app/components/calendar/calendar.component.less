@@ -1,0 +1,30 @@
+
+.weekdays{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    gap:5px;
+    flex-wrap: wrap;
+}
+
+.calendar{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    gap:5px;
+    flex-wrap: wrap;
+    color: rgb(255, 255, 255);
+    //font-family: Verdana, Geneva, Tahoma, sans-serif;
+    .day{
+        background-color: rgb(150, 150, 150);
+        width: 1fr;
+        height: 100px;
+    }
+
+    .today{
+        background-color: rgb(82, 82, 82);
+    }
+    .noday{
+        background-color: rgb(216, 216, 216);
+    }
+    
+}
+

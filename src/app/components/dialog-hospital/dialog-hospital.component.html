@@ -1,0 +1,13 @@
+
+<form [formGroup]="form" class="form">
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="hospitalName" />
+        <label for="username">Nome do Hospital</label>
+    </p-iftalabel>
+    <p-iftalabel>
+    <input type="text" pInputText formControlName="address" />
+    <label for="username">Endereço</label>
+    </p-iftalabel>
+     
+     <p-button (click)="mode == 0 ? save() : update()" label="Salvar"  [disabled]="form.invalid" />
+</form>

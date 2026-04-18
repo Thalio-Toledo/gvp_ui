@@ -1,0 +1,28 @@
+
+<div class="hospitals-container">
+    <div class="hospitals-title">
+        <h2>Hospitais</h2>
+        <p-button (click)="createHospital()"  icon="pi pi-plus" [rounded]="true" />
+    </div>
+    <p-table [value]="hospitals()" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>Hospital</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-hospital>
+            <tr>
+                <td>{{ hospital.name }}</td>
+                <td>{{ hospital.address }}</td>
+                <td style="display: flex; gap:10px">
+                    <p-button (click)="editHospital(hospital)"  icon="pi pi-pencil" [rounded]="true" />
+                    <p-button severity="danger"  (click)="deleteHospital(hospital)"  icon="pi pi-times" [rounded]="true" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+

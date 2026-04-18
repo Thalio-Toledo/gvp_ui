@@ -32,7 +32,8 @@
               }
             ],
             "styles": [
-              "src/styles.less"
+                "node_modules/primeicons/primeicons.css",
+                "src/styles.less"
             ],
             "scripts": []
           },
@@ -91,7 +92,8 @@
               }
             ],
             "styles": [
-              "src/styles.less"
+                "node_modules/primeicons/primeicons.css",
+                "src/styles.less"
             ],
             "scripts": []
           }

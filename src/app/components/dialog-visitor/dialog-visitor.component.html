@@ -1,0 +1,26 @@
+
+<form [formGroup]="form" class="form">
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="visitorName" />
+        <label for="username">Nome do Visitante</label>
+    </p-iftalabel>
+
+    <p-datepicker formControlName="birthDate" appendTo="body" />
+
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="emailJwpub" />
+        <label for="username">E-mail Jwpub</label>
+    </p-iftalabel>
+
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="emailPersonal" />
+        <label for="username">E-mail Pessoal</label>
+    </p-iftalabel>
+
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="phoneNumber" />
+        <label for="username">Numero de Telefone</label>
+    </p-iftalabel>
+
+     <p-button (click)="mode == 0 ? save() : update()" label="Salvar"  [disabled]="form.invalid" />
+</form>

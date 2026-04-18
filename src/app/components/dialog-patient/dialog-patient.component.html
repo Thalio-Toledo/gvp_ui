@@ -1,0 +1,26 @@
+
+<form [formGroup]="form" class="form">
+    <p-iftalabel>
+        <input type="text" pInputText formControlName="patientName" />
+        <label for="username">Nome do Paciente</label>
+    </p-iftalabel>
+    <p-iftalabel>
+        <p-inputnumber inputId="integeronly" formControlName="age" min="1" max="110"/>
+        <label for="username">Idade</label>
+    </p-iftalabel>
+
+    <p-datepicker formControlName="entranceAt" appendTo="body" />
+    
+    <p-datepicker formControlName="exitAt" appendTo="body" />
+
+    
+     <p-select 
+     formControlName="hospital" 
+     [options]="hospitals()"
+     appendTo="body"
+     optionLabel="name"
+     placeholder="Selecione o Hospital"
+     class="w-full md:w-56" />
+
+     <p-button (click)="mode == 0 ? save() : update()" label="Salvar"  [disabled]="form.invalid" />
+</form>

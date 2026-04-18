@@ -1,0 +1,26 @@
+<h1>{{monthName()}} {{year()}} </h1>
+
+<p-button (click)="prevMonth()" icon="pi pi-angle-left" [rounded]="true" [text]="true" severity="secondary" />
+<p-button (click)="nextMonth()" icon="pi pi-angle-right" [rounded]="true" [text]="true" severity="secondary" />
+
+<div class="weekdays">
+    @for (weekday of calendar().weekDays; track $index) {
+        <div class="day">{{weekday}}</div>
+    }
+</div>
+
+<div class="calendar">
+    @for (day of calendar().days; track $index) {
+        @if(day === 'X'){
+            <div class="noday"></div>
+        }@else {
+            <div class="day" [ngClass]="markToday(day)">
+                {{day | date: 'dd'}}
+
+                @for(visit of getVisitsByDay(day);track $index){
+                    <p-button [label]="visit.visitName" />
+                }
+            </div>
+        }
+    }
+</div>
