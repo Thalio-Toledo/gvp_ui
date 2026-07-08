@@ -1,0 +1,10 @@
+<p-dialog header="Detalhes da visita" [modal]="true" [(visible)]="visible" [closable]="true" [style]="{ width: '30rem' }" [draggable]="false" [resizable]="false" (onHide)="closeDialog()" (visibleChange)="onVisibleChange($event)">
+  @if (visit) {
+    <div class="visit-modal-content">
+      <p><strong>Paciente:</strong> {{ visit.visitName }}</p>
+      <p><strong>Data da visita:</strong> {{ visit.data | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Hospital:</strong> {{ visit.hospitalName || 'Não informado' }}</p>
+      <p><strong>Endereço:</strong> {{ visit.hospitalAddress || 'Não informado' }}</p>
+    </div>
+  }
+</p-dialog>

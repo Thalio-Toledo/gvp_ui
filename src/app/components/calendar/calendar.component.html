@@ -1,26 +1,79 @@
-<h1>{{monthName()}} {{year()}} </h1>
-
-<p-button (click)="prevMonth()" icon="pi pi-angle-left" [rounded]="true" [text]="true" severity="secondary" />
-<p-button (click)="nextMonth()" icon="pi pi-angle-right" [rounded]="true" [text]="true" severity="secondary" />
-
-<div class="weekdays">
-    @for (weekday of calendar().weekDays; track $index) {
-        <div class="day">{{weekday}}</div>
+<h1>
+    @if (viewMode() === 'day') {
+        {{ selectedDate() | date: 'fullDate' }}
+    } @else if (viewMode() === 'week') {
+        {{ getWeekDays()[0] | date: 'dd/MM' }} - {{ getWeekDays()[6] | date: 'dd/MM' }}
+    } @else {
+        {{monthName()}} {{year()}}
     }
+</h1>
+
+<div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+    <p-button label="Dia" [text]="viewMode() !== 'day'" [outlined]="viewMode() === 'day'" (click)="setViewMode('day')" />
+    <p-button label="Semana" [text]="viewMode() !== 'week'" [outlined]="viewMode() === 'week'" (click)="setViewMode('week')" />
+    <p-button label="Mês" [text]="viewMode() !== 'month'" [outlined]="viewMode() === 'month'" (click)="setViewMode('month')" />
 </div>
 
-<div class="calendar">
-    @for (day of calendar().days; track $index) {
-        @if(day === 'X'){
-            <div class="noday"></div>
-        }@else {
-            <div class="day" [ngClass]="markToday(day)">
-                {{day | date: 'dd'}}
+<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+    <p-button (click)="prevMonth()" icon="pi pi-angle-left" [rounded]="true" [text]="true" severity="secondary" />
+    <p-button (click)="nextMonth()" icon="pi pi-angle-right" [rounded]="true" [text]="true" severity="secondary" />
+</div>
 
-                @for(visit of getVisitsByDay(day);track $index){
-                    <p-button [label]="visit.visitName" />
+@if (viewMode() === 'day') {
+    <div class="day-view-card">
+        <div class="day-view-header">
+            <strong>{{ getWeekdayName(selectedDate()) }}, {{ selectedDate() | date: 'dd' }} de {{ getMonthName(selectedDate()) }}</strong>
+        </div>
+        <div class="day-view-events">
+            @if (getVisitsByDay(selectedDate()).length > 0) {
+                @for (visit of getVisitsByDay(selectedDate()); track $index) {
+                    <div class="event-card">
+                        <p-tag [value]="visit.visitName" [style]="{ background: getTagColor(visit) + '22', color: getTagColor(visit), border: '1px solid ' + getTagColor(visit) }" (click)="openVisitDialog(visit)" />
+                    </div>
+                }
+            } @else {
+                <div class="empty-state">Nenhum paciente para este dia.</div>
+            }
+        </div>
+    </div>
+} @else if (viewMode() === 'week') {
+    <div class="weekdays">
+        @for (day of getWeekDays(); track $index) {
+            <div class="day week-day-card" (click)="selectDate(day)">
+                <strong>{{ getWeekdayName(day) }}</strong>
+                <div class="week-day-number">{{ day | date: 'dd' }}</div>
+                @if (getVisitsByDay(day).length > 0) {
+                    <div class="week-day-events">
+                        @for (visit of getVisitsByDay(day); track $index) {
+                            <p-tag [value]="visit.visitName" [style]="{ background: getTagColor(visit) + '22', color: getTagColor(visit), border: '1px solid ' + getTagColor(visit) }" (click)="openVisitDialog(visit)" />
+                        }
+                    </div>
                 }
             </div>
         }
-    }
-</div>
+    </div>
+} @else {
+    <div class="weekdays">
+        @for (weekday of calendar().weekDays; track $index) {
+            <div class="day">{{weekday}}</div>
+        }
+    </div>
+
+    <div class="calendar">
+        @for (day of calendar().days; track $index) {
+            @if(day === 'X'){
+                <div class="noday"></div>
+            }@else {
+                <div class="day" [ngClass]="markToday(day)" (click)="selectDate(day)">
+                    {{day | date: 'dd'}}
+
+                    @for(visit of getVisitsByDay(day);track $index){
+                        <p-tag [value]="visit.visitName" [style]="{ background: getTagColor(visit) + '22', color: getTagColor(visit), border: '1px solid ' + getTagColor(visit) }" (click)="openVisitDialog(visit)" />
+                    }
+                </div>
+            }
+        }
+    </div>
+}
+
+<app-visit-modal [visible]="dialogVisible" (visibleChange)="dialogVisible = $event" [visit]="selectedVisit" (closed)="closeVisitDialog()"></app-visit-modal>

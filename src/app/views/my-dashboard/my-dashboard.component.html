@@ -1,0 +1,24 @@
+<section class="dashboard-card">
+  <div class="user-info">
+    <img [src]="userImage" alt="Foto do usuário" />
+    <div>
+      <h2>Olá, {{ userName }}</h2>
+      <p>Bem-vindo(a) ao seu painel</p>
+    </div>
+  </div>
+
+  <div class="visits-section">
+    <h3>Minhas visitas</h3>
+    <div class="visit-list">
+      @for (visit of visits; track visit.title) {
+        <article class="visit-card">
+          <div class="visit-card__content">
+            <strong>{{ visit.title }}</strong>
+            <p>{{ visit.date }}</p>
+          </div>
+          <span class="visit-card__status">{{ visit.status }}</span>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,10 +1,21 @@
 
 <div class="hospitals-container">
     <div class="hospitals-title">
-        <h2>Hospitais</h2>
-        <p-button (click)="createHospital()"  icon="pi pi-plus" [rounded]="true" />
+        <div class="title-group">
+            <h2>Hospitais</h2>
+            <span class="subtitle">Gerencie os hospitais cadastrados</span>
+        </div>
+        <div class="header-actions">
+            <span class="p-input-icon-left search-field">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar hospital" [(ngModel)]="searchTerm" />
+            </span>
+            <p-button label="Novo hospital" icon="pi pi-plus" (click)="createHospital()" />
+        </div>
     </div>
-    <p-table [value]="hospitals()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-tieredMenu #menu [model]="menuItems" [popup]="true" />
+
+    <p-table [value]="filteredHospitals()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
                 <th>Hospital</th>
@@ -16,9 +27,14 @@
             <tr>
                 <td>{{ hospital.name }}</td>
                 <td>{{ hospital.address }}</td>
-                <td style="display: flex; gap:10px">
-                    <p-button (click)="editHospital(hospital)"  icon="pi pi-pencil" [rounded]="true" />
-                    <p-button severity="danger"  (click)="deleteHospital(hospital)"  icon="pi pi-times" [rounded]="true" />
+                <td>
+                    <p-button
+                        icon="pi pi-ellipsis-v"
+                        [rounded]="true"
+                        [text]="true"
+                        severity="secondary"
+                        (click)="openMenu($event, hospital)"
+                    />
                 </td>
             </tr>
         </ng-template>

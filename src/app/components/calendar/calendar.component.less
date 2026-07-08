@@ -1,30 +1,137 @@
-
-.weekdays{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-    gap:5px;
-    flex-wrap: wrap;
+:host {
+    display: block;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    color: #202124;
 }
 
-.calendar{
+h1 {
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #3c4043;
+}
+
+.weekdays,
+.calendar {
     display: grid;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-    gap:5px;
-    flex-wrap: wrap;
-    color: rgb(255, 255, 255);
-    //font-family: Verdana, Geneva, Tahoma, sans-serif;
-    .day{
-        background-color: rgb(150, 150, 150);
-        width: 1fr;
-        height: 100px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.weekdays {
+    margin-bottom: 8px;
+
+    .day {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #5f6368;
+        text-transform: uppercase;
+        padding: 6px 0;
+    }
+}
+
+.day-view-card,
+.week-day-card {
+    border: 1px solid #e8eaed;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.08);
+}
+
+.day-view-card {
+    padding: 16px;
+    min-height: 220px;
+}
+
+.day-view-header {
+    margin-bottom: 12px;
+    color: #3c4043;
+    font-size: 1rem;
+}
+
+.day-view-events,
+.week-day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.event-card,
+.empty-state {
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: #f8f9fa;
+}
+
+.empty-state {
+    color: #5f6368;
+    font-size: 0.9rem;
+}
+
+.week-day-card {
+    padding: 10px;
+    min-height: 120px;
+    text-align: left;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(60, 64, 67, 0.16);
+        transform: translateY(-1px);
+    }
+}
+
+.week-day-number {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #202124;
+}
+
+.calendar {
+    .day {
+        min-height: 110px;
+        border: 1px solid #e8eaed;
+        border-radius: 10px;
+        padding: 8px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(60, 64, 67, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 2px 8px rgba(60, 64, 67, 0.16);
+            transform: translateY(-1px);
+        }
     }
 
-    .today{
-        background-color: rgb(82, 82, 82);
+    .today {
+        background: #e8f0fe;
+        border-color: #8ab4f8;
     }
-    .noday{
-        background-color: rgb(216, 216, 216);
+
+    .noday {
+        background: #f1f3f4;
+        border-radius: 10px;
+        min-height: 110px;
+        border: 1px dashed #dadce0;
     }
-    
+}
+
+::ng-deep p-tag {
+    .p-tag {
+        border-radius: 999px;
+        font-size: 0.5rem;
+        line-height: 1.02;
+        padding: 0.08rem 0.3rem;
+        min-height: auto;
+        background: #1a73e8;
+        color: #fff;
+    }
 }
 

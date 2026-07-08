@@ -1,9 +1,20 @@
 <div class="visitors-container">
     <div class="visitors-title">
-        <h2>Visitantes</h2>
-        <p-button (click)="createVisitor()"  icon="pi pi-plus" [rounded]="true" />
+        <div class="title-group">
+            <h2>Visitantes</h2>
+            <span class="subtitle">Gerencie os visitantes cadastrados</span>
+        </div>
+        <div class="header-actions">
+            <span class="p-input-icon-left search-field">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar visitante" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" />
+            </span>
+            <p-button label="Novo visitante" icon="pi pi-plus" (click)="createVisitor()" />
+        </div>
     </div>
-    <p-table [value]="visitors()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-tieredMenu #menu [model]="menuItems" [popup]="true" />
+
+    <p-table [value]="filteredVisitors()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
                 <th>Visitante</th>
@@ -22,9 +33,14 @@
                 <td>{{ visitor.emailJwpub }}</td>
                 <td>{{ visitor.emailPersonal }}</td>
                 <td>{{ visitor.phoneNumber }}</td>
-                <td style="display: flex; gap:10px">
-                    <p-button (click)="editVisitor(visitor)"  icon="pi pi-pencil" [rounded]="true" />
-                    <p-button severity="danger"  (click)="deleteVisitor(visitor)"  icon="pi pi-times" [rounded]="true" />
+                <td>
+                    <p-button
+                        icon="pi pi-ellipsis-v"
+                        [rounded]="true"
+                        [text]="true"
+                        severity="secondary"
+                        (click)="openMenu($event, visitor)"
+                    />
                 </td>
             </tr>
         </ng-template>

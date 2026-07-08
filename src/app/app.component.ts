@@ -26,38 +26,6 @@ export class AppComponent implements OnInit {
                 separator: true
             },
             {
-                label: 'Documents',
-                items: [
-                    {
-                        label: 'Calendário',
-                        icon: 'pi pi-calendar',
-                        routerLink:'/calendar'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'pi pi-search',
-                    }
-                ]
-            },
-            {
-                label: 'Profile',
-                items: [
-                    {
-                        label: 'Settings',
-                        icon: 'pi pi-cog',
-                    },
-                    {
-                        label: 'Messages',
-                        icon: 'pi pi-inbox',
-                        badge: '2'
-                    },
-                    {
-                        label: 'Logout',
-                        icon: 'pi pi-sign-out',
-                    }
-                ]
-            },
-            {
                 label: 'Configurações',
                 items: [
                     {
@@ -75,7 +43,16 @@ export class AppComponent implements OnInit {
                         label: 'Hospitais',
                         icon: 'pi pi-building',
                         routerLink:'/hospitals'
-                    }
+                    },
+                    {
+                        label: 'Calendário',
+                        icon: 'pi pi-calendar',
+                        routerLink:'/calendar'
+                    },
+                     {
+                        label: 'Logout',
+                        icon: 'pi pi-sign-out',
+                    },
                 ]
             },
             {

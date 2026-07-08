@@ -1,20 +1,51 @@
 app-hospitals{
     padding: 20px;
+    display: block;
+
     .hospitals-container{
-        padding: 10px;
+        padding: 16px 20px 20px;
         border: solid 1px #cbd5e1;
-        border-radius: 10px;
+        border-radius: 12px;
+        background: #fff;
 
         .hospitals-title{
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
 
-            h2{
-                position: relative;
-                top:-45px;
-                background-color: white;
-                padding-inline: 2px;
+            .title-group{
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                h2{
+                    margin: 0;
+                    font-size: 1.25rem;
+                    color: #0f172a;
+                }
+
+                .subtitle{
+                    color: #64748b;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .header-actions{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .search-field {
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        width: 220px;
+                        padding-left: 2.2rem;
+                    }
+                }
             }
         }
     }

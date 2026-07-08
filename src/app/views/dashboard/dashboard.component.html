@@ -1,0 +1,36 @@
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="collapsed">
+
+    <div class="logo">
+      <i class="pi pi-chart-line"></i>
+      @if(!collapsed){
+          <span>GVP</span>
+      }
+    </div>
+
+
+    <nav class="menu">
+      @for (item of menu; track $index) {
+        <a class="menu-item" [routerLink]="item.routerLink">
+          <i [class]="item.icon" [pTooltip]="item.label"></i>
+          @if(!collapsed){
+            <span >{{item.label}}</span>
+          }
+        </a>
+      }
+    </nav>
+
+    <p-button [icon]="collapsed ?  'pi pi-angle-right':'pi pi-angle-left' " severity="info"  class="collapse-btn" (click)="toggleMenu()"></p-button>
+
+  </aside>
+
+  <div class="main">
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>
